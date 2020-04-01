@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\categories",
+    "\\src\\app\\categories\\category",
+    "\\src\\app\\employees",
+    "\\src\\app\\employees\\employee",
+    "\\src\\app\\employees\\list",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\models"
+  ],
+  "SelectedNode": "\\src\\app\\shared\\models\\new-employee.model.ts",
+  "PreviewInSolutionExplorer": false
+}

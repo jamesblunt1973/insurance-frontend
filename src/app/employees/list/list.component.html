@@ -1,0 +1,37 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    مدیریت پرسنل
+  </b>
+  <app-counter [number]="employees.length"></app-counter>
+</mat-toolbar>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-card *ngFor="let employee of employees;" [ngClass]="{selected: employee.edit }">
+  <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-around">
+    <div fxFlex="20%">
+      <p>نام: {{employee.firstName}}</p>
+    </div>
+    <div fxFlex="20%">
+      <p>نام خانوادگی: {{employee.lastName}}</p>
+    </div>
+    <div fxFlex="20%">
+      <p>نام کاربری: {{employee.username}}</p>
+    </div>
+    <p ngClass.gt-md="left" fxLayout="row wrap" fxLayoutAlign="end baseline" fxLayoutGap="5px">
+      <button mat-raised-button color="primary" [routerLink]="['/employees', employee.id]">
+        ویرایش
+        <mat-icon matSuffix svgIcon="check"></mat-icon>
+      </button>
+      <button mat-raised-button color="warn" (click)="remove(employee)">
+        حذف
+        <mat-icon matSuffix svgIcon="close"></mat-icon>
+      </button>
+    </p>
+  </div>
+</mat-card>
+
+
+<button class="btn bottom-btn" mat-icon-button color="accent" routerLink="/employees/new">
+  <mat-icon svgIcon="plus-circle"></mat-icon>
+</button>

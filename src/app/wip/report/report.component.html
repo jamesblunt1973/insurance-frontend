@@ -1,0 +1,22 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    درخواست‌های در دست بررسی
+  </b>
+  <img class="refresh" [attr.src]="loading ? '/assets/images/waiting.gif' : '/assets/images/waiting.png'" (click)="getData()" />
+  <app-counter [number]="prescriptions.length"></app-counter>
+</mat-toolbar>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-card *ngFor="let prescription of prescriptions | slice:startIndex:endIndex; let i = index" [ngClass]="{selected: prescription.expand }">
+  <app-prescription
+                    [prescription]="prescription"
+                    [commands]="true"
+                    [busy]="actionLoading"
+                    (confirm)="confirmPrescription(prescription)"
+                    (reject)="rejectPrescription(prescription)"
+                    (completion)="completionRequest(prescription)"
+                    (expand)="expandPanel(prescription)"></app-prescription>
+</mat-card>
+
+<app-pager [total]="prescriptions.length" [counts]="counts" (gotoPage)="changePage($event)" (changeCount)="changeCount($event)"></app-pager>

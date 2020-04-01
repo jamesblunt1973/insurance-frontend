@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div class="content" mat-dialog-content>
+  <form #reasonForm="ngForm" class="narrow-form">
+    <mat-selection-list [(ngModel)]="model.list" name="reasons">
+      <mat-list-option *ngFor="let item of data.list" [value]="item">
+        {{item}}
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-form-field>
+      <textarea matInput placeholder="شرح" [(ngModel)]="model.description" name="description" rows="3"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-raised-button color="primary" [mat-dialog-close]="model" [disabled]="!reasonForm.valid">تایید</button>
+  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>لغو</button>
+</div>

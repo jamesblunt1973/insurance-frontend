@@ -1,0 +1,18 @@
+<mat-toolbar class="top" fxlayoyt="row" fxLayoutAlign="flex-start center" fxLayoutGap="10px">
+  <button mat-icon-button (click)="changeMenuBtn()">
+    <div class="hamburger" [ngClass]="menuStatus">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+  <img src="/assets/images/logo.png" />
+  <b class="green">پنل بیمه {{insuranceName}}</b>
+  <span *ngIf="!userName" class="btn user-icon" routerLink="/auth/login">ورود به سامانه</span>
+  <div *ngIf="userName" class="user-icon" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <span class="icon-list" matListIcon></span>
+    <span>{{userName}}</span>
+    <small class="btn logout-btn" (click)="logout()">خروج</small>
+  </div>
+</mat-toolbar>

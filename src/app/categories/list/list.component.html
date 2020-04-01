@@ -1,0 +1,47 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    مدیریت دسته‌ها
+  </b>
+  <app-counter [number]="categories.length"></app-counter>
+</mat-toolbar>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-card *ngFor="let category of categories;" [ngClass]="{selected: category.edit }">
+  <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-around">
+    <div fxFlex="20%">
+      <p>عنوان دسته: {{category.name}}</p>
+      <p>سقف تعداد فایل: {{category.maxIndexLimit}}</p>
+    </div>
+    <div fxFlex="20%">
+      <h4>مدارک مورد نیاز</h4>
+      <p *ngFor="let reason of category.ReasonItems">{{reason}}</p>
+    </div>
+    <div fxFlex="30%">
+      <h4>دلایل رد نسخه</h4>
+      <p *ngFor="let reject of category.RejectItems">{{reject}}</p>
+    </div>
+    <div fxFlex="10%">
+      <h4>فایل(های) ضمیمه</h4>
+      <div class="latin-text">
+        <p *ngFor="let file of category.IndexFileNames">
+          <a target="_blank" [href]="path + file">{{file}}</a>
+        </p>
+      </div>
+    </div>
+    <p ngClass.gt-md="left" fxLayout="row wrap" fxLayoutAlign="end baseline" fxLayoutGap="5px">
+      <button mat-raised-button color="primary" [routerLink]="['/categories', category.id]">
+        ویرایش
+        <mat-icon matSuffix svgIcon="check"></mat-icon>
+      </button>
+      <button mat-raised-button color="warn" (click)="remove(category)">
+        حذف
+        <mat-icon matSuffix svgIcon="close"></mat-icon>
+      </button>
+    </p>
+  </div>
+</mat-card>
+
+<button class="btn bottom-btn" mat-icon-button color="accent" routerLink="/categories/new" *ngIf="canAdd">
+  <mat-icon svgIcon="plus-circle"></mat-icon>
+</button>

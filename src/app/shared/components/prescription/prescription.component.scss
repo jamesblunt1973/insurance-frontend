@@ -1,0 +1,46 @@
+.prescription-details {
+  & > * {
+    margin-top: 20px;
+  }
+
+  a {
+    display: block;
+  }
+
+  .main-img {
+    max-height: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  .thumbs {
+    text-align: center;
+
+    img {
+      height: 90px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+
+      &:hover {
+        margin: 0;
+        border: 5px solid #ccc;
+      }
+
+      &.active {
+        margin: 0;
+        border: 5px solid #02a400;
+        cursor: default;
+      }
+    }
+  }
+
+  .mat-spinner {
+    margin: 30px auto;
+  }
+}

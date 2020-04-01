@@ -1,0 +1,20 @@
+.mat-card {
+  margin: 10px 0;
+
+  &.selected {
+    background-color: #f3f3f3;
+  }
+}
+
+.latin-text {
+  text-align: left;
+  direction: ltr;
+}
+
+.left {
+  margin-right: auto;
+}
+
+.mat-spinner {
+  margin: 30px auto;
+}

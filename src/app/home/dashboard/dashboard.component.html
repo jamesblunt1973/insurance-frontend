@@ -1,0 +1,28 @@
+<div fxLayout="row wrap" class="report-header">
+  <mat-card *ngFor="let clue of clues" fxFlex="1 1 auto">
+    <mat-icon [svgIcon]="clue.status > 0 ? 'arrow-top-right' : (clue.status < 0 ? 'arrow-bottom-right' : 'arrow-right')"></mat-icon>
+    <p>{{clue.name}}</p>
+    <h1>{{clue.value}}</h1>
+  </mat-card>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between">
+  <mat-card class="chart-container" fxFlex="40%" fxFlex.lt-lg="1 1 100%">
+    <ngx-charts-pie-chart [results]="summury"
+                          [legend]="true"
+                          (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+  </mat-card>
+  <mat-card class="chart-container" fxFlex="55%" fxFlex.lt-lg="1 1 100%">
+    <ngx-charts-bar-vertical [results]="weekly"
+                             [xAxis]="true"
+                             [yAxis]="true"
+                             [legend]="false"
+                             [showXAxisLabel]="true"
+                             [showYAxisLabel]="true"
+                             [xAxisLabel]="'روز'"
+                             [yAxisLabel]="'تعداد'"
+                             (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </mat-card>
+</div>

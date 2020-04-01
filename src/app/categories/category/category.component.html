@@ -1,0 +1,45 @@
+<form [formGroup]="frmGroup" (ngSubmit)="addCategory()" class="narrow-form">
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>عنوان دسته</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</mat-option>
+        </mat-select>
+        <mat-error>عنوان دسته الزامی است</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput placeholder="تعداد مجاز فایل ارسالی" formControlName="allowed" min="1" />
+        <mat-error>تعداد مجاز فایل الزامی است</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="لیست مدارک (هرکدام در یک خط)" formControlName="reasons" [rows]="frmGroup.value.reasons?.split('\n').length + 1"></textarea>
+        <mat-error>لیست مدارک الزامی است</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="دلایل رد نسخه (هرکدام در یک خط)" formControlName="rejects" [rows]="frmGroup.value.rejects?.split('\n').length + 1"></textarea>
+        <mat-error>لیست مدارک الزامی است</mat-error>
+      </mat-form-field>
+      <div>
+        <h4>فایل ضمیمه</h4>
+
+        <div>
+          <!--*ngIf="!category || !category.IndexFileNames.length"-->
+          <input type="file" (change)="onFileChange($event)" />
+        </div>
+        <div *ngIf="category && category.IndexFileNames.length">
+          <a href="{{path + category.id + '/' + category.IndexFileNames[0]}}" target="_blank">دانلود فایل ضمیمه</a>
+          <!--<button type="button" mat-icon-button class="btn btn-warn" (click)="category.IndexFileNames = []">
+            <mat-icon svgIcon="close"></mat-icon>
+          </button>-->
+          <p><span class="warn">*</span> در صورت انتخاب، فایل جدید با فایل قبلی جایگزین خواهد شد</p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="start">
+      <button type="submit" color="primary" mat-raised-button [disabled]="frmGroup.invalid">{{category ? 'ثبت تغیرات' : 'ثبت دسته جدید'}}</button>
+      <button type="button" color="warn" mat-raised-button (click)="resetForm()">بازنشانی فرم</button>
+      <button type="button" color="accent" mat-raised-button routerLink="/categories" class="left">بازگشت به لیست</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

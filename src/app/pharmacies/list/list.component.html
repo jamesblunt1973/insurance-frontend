@@ -1,0 +1,17 @@
+<small class="hint">داروخانه‌های فعال مجاز به ارسال نسخه، به بیمه می‌باشند.</small>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="card-container">
+  <mat-card *ngFor="let pharmacy of pharmacies">
+    <mat-card-content>
+      <h4>{{pharmacy.name}}</h4>
+      <small *ngIf="pharmacy.address"><mat-hint>{{pharmacy.address}}</mat-hint></small>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+      <a mat-icon-button title="Google Map" target="_blank" [href]="'https://www.google.com/maps/@' + pharmacy.longitude + ',' + pharmacy.latitude + ',16z'">
+        <mat-icon svgIcon="map-marker"></mat-icon>
+      </a>
+      <button *ngIf="!pharmacy.active" color="accent" mat-raised-button (click)="addPharmacy(pharmacy)">فعال کردن</button>
+      <button *ngIf="pharmacy.active" color="warn" mat-raised-button (click)="removePharmacy(pharmacy)">غیر فعال کردن</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

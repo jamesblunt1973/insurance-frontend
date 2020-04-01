@@ -1,0 +1,27 @@
+<form [formGroup]="frmGroup" (ngSubmit)="addEmployee()" class="narrow-form">
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field>
+        <input type="text" matInput placeholder="نام" formControlName="firstName" />
+        <mat-error>نام کارمند الزامی است</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="نام خانوادگی" formControlName="lastName" />
+        <mat-error>نام خانوادگی کارمند الزامی است</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="شماره همراه" formControlName="username" />
+        <mat-error>شماره همراه کارمند الزامی است</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="رمز عبور" formControlName="password" />
+        <mat-error>رمز عبور</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="start">
+      <button type="submit" color="primary" mat-raised-button [disabled]="frmGroup.invalid">{{employee ? 'ثبت تغیرات' : 'ثبت کارمند جدید'}}</button>
+      <button type="reset" color="warn" mat-raised-button>بازنشانی فرم</button>
+      <button type="button" color="accent" mat-raised-button routerLink="/employees" class="left">بازگشت به لیست</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

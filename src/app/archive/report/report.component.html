@@ -1,0 +1,66 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+  <b>
+    آرشیو درخواست ها
+  </b>
+  <app-counter [number]="totalCount"></app-counter>
+</mat-toolbar>
+
+<div class="panel-wrapper">
+  <div class="panel-title">
+    <div class="panel-title-spacer">فیلتر و جستجو</div>
+    <mat-icon matSuffix svgIcon="magnify"></mat-icon>
+  </div>
+
+  <div class="panel-body">
+    <form [formGroup]="filterForm" (ngSubmit)="totalCount = 0; getReport(1)">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="24%" fxFlex.lt-md="100%">
+          <input type="text" matInput placeholder="کد پیگیری" formControlName="code" />
+        </mat-form-field>
+        <mat-form-field fxFlex="24%" fxFlex.lt-md="100%">
+          <input type="text" matInput [matAutocomplete]="auto" placeholder="نام یا کد داروخانه"
+            formControlName="pharmacy">
+          <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="getPharmacyName">
+            <mat-option *ngFor="let pharmacy of filteredPharmacies | async" [value]="pharmacy">
+              {{pharmacy.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field fxFlex="24%" fxFlex.lt-md="100%">
+          <mat-label>انتخاب وضعیت</mat-label>
+          <mat-select formControlName="state">
+            <mat-option [value]="null"></mat-option>
+            <mat-option [value]="1">درانتظار</mat-option>
+            <mat-option [value]="20">رد شده</mat-option>
+            <mat-option [value]="10">تایید شده</mat-option>
+            <mat-option [value]="51">درخواست تکمیل مدارک</mat-option>
+            <mat-option [value]="61">مدارک تکمیل شده</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="10%" fxFlex.lt-md="45%">
+          <input matInput [matDatepicker]="from" placeholder="از تاریخ" formControlName="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+          <mat-datepicker #from></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field fxFlex="10%" fxFlex.lt-md="45%">
+          <input matInput [matDatepicker]="to" placeholder="تا تاریخ" formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+          <mat-datepicker #to></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxlayout="row" fxLayoutAlign="end">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!!filterForm.value.pharmacy && !filterForm.value.pharmacy.id">دریافت گزارش</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-card *ngFor="let prescription of prescriptions; let i = index" [ngClass]="{selected: prescription.expand }">
+  <app-prescription [prescription]="prescription"
+                    [commands]="false"
+                    (expand)="expandPanel(prescription)"></app-prescription>
+</mat-card>
+
+<app-pager [total]="totalCount" [counts]="counts" (gotoPage)="getReport($event)"></app-pager>

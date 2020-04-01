@@ -1,0 +1,47 @@
+.report {
+  margin: 12px 4px 0 4px;
+  max-width: calc(100% - 8px);
+}
+
+.latin-text {
+  text-align: left;
+  direction: ltr;
+}
+
+.mat-card {
+  margin: 10px 0;
+
+  &.selected {
+    background-color: #f3f3f3;
+  }
+}
+
+.border {
+  border-bottom: 1px dotted #ccc;
+}
+
+.forms {
+  padding-right: 5px !important;
+
+  .panel-wrapper {
+    margin: 30px auto;
+    max-width: 1180px;
+  }
+}
+
+.actions {
+  font-size: 2rem;
+}
+
+.refresh {
+    cursor: pointer;
+    height: 32px;
+}
+
+app-counter {
+  margin-right: auto;
+}
+
+.mat-spinner {
+  margin: 30px auto;
+}

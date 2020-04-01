@@ -1,0 +1,75 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$rad-primary: mat-palette($mat-blue);
+$rad-accent: mat-palette($mat-green);
+$rad-warn: mat-palette($mat-orange);
+$rad-error: mat-palette($mat-red);
+$rad-theme: mat-light-theme($rad-primary, $rad-accent, $rad-error);
+$primary: mat-color($rad-primary);
+$accent: mat-color($rad-accent);
+$warn: mat-color($rad-warn);
+$orange: #FFCC45;
+$green: #079268;
+$red: #FF263F;
+$blue: #2c73ff;
+$purple: #6772c1;
+$lightGray: #919191;
+$veryLightBlue: #fbfcff;
+$sectinBorder: #d3d3d3;
+// $gray:rgb(107, 110, 112);
+$gray: rgb(70, 72, 73); //#464849
+$border: rgba(107, 110, 112, .25); //#919191
+$borderHover: rgba(107, 110, 112, .50);
+$cardHeader: rgba(70, 72, 73, .025);
+$lightGrayBack: rgba(0, 0, 0, 0.01);
+$veryLightGray: rgba(107, 110, 112, .15); //#919191
+$primaryBack: mat-color($rad-primary, 50);
+$primaryLight: mat-color($rad-primary, 300);
+$primaryDark: mat-color($rad-primary, 900);
+$gradient: linear-gradient(to right, mat-color($rad-primary, 500) 0%, mat-color($rad-primary, 900) 100%);
+@include angular-material-theme($rad-theme);
+
+$gray-text-color: rgba(0,0,0,.64);
+$gray-border-color: rgba(0,0,0,.03);
+$gray-bg-color: rgba(0,0,0,.03);
+
+$shadow-from: rgba(0,0,0,.24);
+$shadow-to: rgba(0,0,0,.12);
+
+
+.gray {
+  color: $gray !important;
+}
+
+.green {
+  color: $green !important;
+}
+
+.primary {
+  color: $primary !important;
+}
+
+.accent {
+  color: $accent !important;
+}
+
+.warn {
+  color: $warn !important;
+}
+
+.purple {
+  color: $purple !important;
+}
+
+.orange {
+  color: $orange !important;
+}
+
+.orange-btn {
+  background-color: $orange !important;
+}
+
+.lightGray {
+  color: $lightGray !important;
+}

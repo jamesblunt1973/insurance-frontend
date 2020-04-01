@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
+  <p fxFlex="20%">{{'کد پیگیری: ' + prescription.trackCode + '، شناسه: ' + prescription.id + '، ' + getStateTitle(prescription.state)}}</p>
+  <p fxFlex="25%">{{prescription.pharmacyName}}، {{'کد: ' + prescription.pharmacyId}}</p>
+  <p fxFlex="25%">{{'بیمار: ' + prescription.patientName}}، {{'کد ملی: ' + prescription.patientNationalCode}}</p>
+  <p fxFlex="5%">{{(prescription.prescriptionImagesIDList.length ? prescription.prescriptionImagesIDList.length : 'بدون') + ' تصویر'}}</p>
+  <p fxFlex="10%">{{prescription.receivedDate | momentJalaali:'jYYYY/jMM/jDD'}}</p>
+  <button mat-raised-button color="accent" (click)="expand.emit()" fxFlexAlign.lt-lg="end">
+    مشاهده
+    <mat-icon matSuffix svgIcon="eye"></mat-icon>
+  </button>
+</div>
+<div *ngIf="prescription.expand" class="prescription-details">
+  <p *ngIf="prescription.description">توضیحات نسخه: {{prescription.description}}</p>
+  <div *ngIf="prescription.otc">
+    <span>لیست داروها: </span> <span *ngFor="let medicine of getMedicines(prescription.otc)">{{medicine}}،&nbsp;&nbsp;</span>
+  </div>
+  <div class="thumbs">
+    <img *ngFor="let id of prescription.prescriptionImagesIDList"
+         [src]="imagePath + prescription.id + '/' + id + '?thumbnail=1'"
+         (click)="showImage(imagePath + prescription.id + '/' + id)" />
+    <img *ngFor="let file of prescription.prescriptionIndexesList"
+         [src]="imagePath + 'index/' + prescription.id + '/' + file + '?thumbnail=1'"
+         (click)="showImage(imagePath + 'index/' + prescription.id + '/' + file)" />
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" *ngIf="!busy && commands">
+    <button mat-raised-button color="primary" (click)="confirm.emit()">
+      تایید نسخه
+      <mat-icon matSuffix svgIcon="check-circle"></mat-icon>
+    </button>
+    <button mat-raised-button class="orange-btn" (click)="completion.emit()">
+      تکمیل مدارک
+      <mat-icon matSuffix svgIcon="dots-horizontal-circle"></mat-icon>
+    </button>
+    <button mat-raised-button color="warn" (click)="reject.emit();" class="left">
+      رد نسخه
+      <mat-icon matSuffix svgIcon="close-circle"></mat-icon>
+    </button>
+  </div>
+  <mat-spinner *ngIf="busy"></mat-spinner>
+</div>
